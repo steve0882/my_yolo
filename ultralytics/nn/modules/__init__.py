@@ -59,6 +59,10 @@ from .block import (
     ResNetLayer,
     SCDown,
     TorchVision,
+    ConvNormLayer,
+    BasicBlock,
+    BottleNeck,
+    Blocks
 )
 from .conv import (
     CBAM,
@@ -179,4 +183,8 @@ __all__ = (
     "YOLOEDetect",
     "YOLOESegment",
     "v10Detect",
+    "ConvNormLayer",
+    "BasicBlock",
+    "BottleNeck",
+    "Blocks"
 )

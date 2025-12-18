@@ -68,6 +68,10 @@ from ultralytics.nn.modules import (
     YOLOEDetect,
     YOLOESegment,
     v10Detect,
+    ConvNormLayer,
+    BasicBlock,
+    BottleNeck,
+    Blocks
 )
 from ultralytics.utils import DEFAULT_CFG_DICT, LOGGER, YAML, colorstr, emojis
 from ultralytics.utils.checks import check_requirements, check_suffix, check_yaml
@@ -243,6 +247,12 @@ class BaseModel(torch.nn.Module):
                     m.forward = m.forward_fuse
                 if isinstance(m, v10Detect):
                     m.fuse()  # remove one2many head
+                
+                if isinstance(m,ConvNormLayer):
+                    m.conv = fuse_conv_and_bn(m.conv, m.norm)
+                    delattr(m, 'norm')
+                    m.forward = m.forward_fuse
+
             self.info(verbose=verbose)
 
         return self
@@ -1553,6 +1563,7 @@ def parse_model(d, ch, verbose=True):
             SCDown,
             C2fCIB,
             A2C2f,
+            ConvNormLayer
         }
     )
     repeat_modules = frozenset(  # modules with 'repeat' arguments
@@ -1643,6 +1654,12 @@ def parse_model(d, ch, verbose=True):
             c2 = args[0]
             c1 = ch[f]
             args = [*args[1:]]
+
+        elif m is Blocks:
+            block_type = globals()[args[1]]
+            c1, c2 = ch[f], args[0] * block_type.expansion
+            args = [c1, args[0], block_type, *args[2:]]
+
         else:
             c2 = ch[f]
 
