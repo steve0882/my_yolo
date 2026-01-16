@@ -34,7 +34,10 @@ from .block import (
     AConv,
     ADown,
     Attention,
+    BasicBlock,
+    Blocks,
     BNContrastiveHead,
+    BottleNeck,
     Bottleneck,
     BottleneckCSP,
     C2f,
@@ -47,6 +50,7 @@ from .block import (
     CBFuse,
     CBLinear,
     ContrastiveHead,
+    ConvNormLayer,
     GhostBottleneck,
     HGBlock,
     HGStem,
@@ -59,10 +63,6 @@ from .block import (
     ResNetLayer,
     SCDown,
     TorchVision,
-    ConvNormLayer,
-    BasicBlock,
-    BottleNeck,
-    Blocks
 )
 from .conv import (
     CBAM,
@@ -128,6 +128,9 @@ __all__ = (
     "ADown",
     "Attention",
     "BNContrastiveHead",
+    "BasicBlock",
+    "Blocks",
+    "BottleNeck",
     "Bottleneck",
     "BottleneckCSP",
     "C2f",
@@ -145,6 +148,7 @@ __all__ = (
     "ContrastiveHead",
     "Conv",
     "Conv2",
+    "ConvNormLayer",
     "ConvTranspose",
     "DWConv",
     "DWConvTranspose2d",
@@ -183,8 +187,4 @@ __all__ = (
     "YOLOEDetect",
     "YOLOESegment",
     "v10Detect",
-    "ConvNormLayer",
-    "BasicBlock",
-    "BottleNeck",
-    "Blocks"
 )
