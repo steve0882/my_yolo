@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
 # @Time : 2025/11/13 16:48
 # @Author : shifu wang
 # @File : train
 # @Project : ultralytics-main
 from ultralytics import RTDETR
 
-if __name__ == '__main__':
-
+if __name__ == "__main__":
     # Load a pretrained YOLO11n model
     model = RTDETR(r"ultralytics\cfg\models\rt-detr\rtdetr-resnet101.yaml")
 
@@ -26,5 +24,6 @@ if __name__ == '__main__':
 
     # resume train
     model = RTDETR(r"runs\detect\train2\weights\last.pt")
-    train_results = model.train(resume=True,)
-
+    train_results = model.train(
+        resume=True,
+    )
