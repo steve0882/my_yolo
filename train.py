@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
 # @Time : 2025/11/13 16:48
 # @Author : shifu wang
 # @File : train
 # @Project : ultralytics-main
 from ultralytics import YOLO
 
-if __name__ == '__main__':
-
+if __name__ == "__main__":
     # Load a pretrained YOLO11n model
-    model = YOLO(r"ultralytics\cfg\models\v8\my_yolov8n.yaml",task='detect')
+    model = YOLO(r"ultralytics\cfg\models\v8\my_yolov8n.yaml", task="detect")
 
     # Train the model on the COCO8 dataset for 100 epochs
     train_results = model.train(
