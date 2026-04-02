@@ -27,6 +27,7 @@ from ultralytics.nn.modules import (
     A2C2f,
     AConv,
     ADown,
+    Blocks,
     Bottleneck,
     BottleneckCSP,
     C2f,
@@ -42,6 +43,7 @@ from ultralytics.nn.modules import (
     Concat,
     Conv,
     Conv2,
+    ConvNormLayer,
     ConvTranspose,
     Detect,
     DWConv,
@@ -68,10 +70,6 @@ from ultralytics.nn.modules import (
     YOLOEDetect,
     YOLOESegment,
     v10Detect,
-    ConvNormLayer,
-    BasicBlock,
-    BottleNeck,
-    Blocks
 )
 from ultralytics.utils import DEFAULT_CFG_DICT, LOGGER, YAML, colorstr, emojis
 from ultralytics.utils.checks import check_requirements, check_suffix, check_yaml
@@ -247,10 +245,10 @@ class BaseModel(torch.nn.Module):
                     m.forward = m.forward_fuse
                 if isinstance(m, v10Detect):
                     m.fuse()  # remove one2many head
-                
-                if isinstance(m,ConvNormLayer):
+
+                if isinstance(m, ConvNormLayer):
                     m.conv = fuse_conv_and_bn(m.conv, m.norm)
-                    delattr(m, 'norm')
+                    delattr(m, "norm")
                     m.forward = m.forward_fuse
 
             self.info(verbose=verbose)
@@ -1563,7 +1561,7 @@ def parse_model(d, ch, verbose=True):
             SCDown,
             C2fCIB,
             A2C2f,
-            ConvNormLayer
+            ConvNormLayer,
         }
     )
     repeat_modules = frozenset(  # modules with 'repeat' arguments

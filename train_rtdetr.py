@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # @Time : 2025/12/17 12:37
 # @Author : shifu wang
 # @File : train_rtdetr.py
@@ -10,8 +9,7 @@
 # @Project : ultralytics-main
 from ultralytics import RTDETR
 
-if __name__ == '__main__':
-
+if __name__ == "__main__":
     # Load a pretrained YOLO11n model
     model = RTDETR("ultralytics/cfg/models/rt-detr/rtdetr-resnet50.yaml")
 
